@@ -1,5 +1,5 @@
 
-[![CI](https://github.com/JTPfi/flask_eao/blob/main/.github/workflows/unittests_doc.yml/badge.svg)](https://github.com/JTPfi/flask_eao/blob/main/.github/workflows/unittests_doc.yml)
+[![CI](https://github.com/EnergyAssetOptimization/eao_server/actions/workflows/unittests_doc.yml/badge.svg)](https://github.com/EnergyAssetOptimization/eao_server/blob/main/.github/workflows/unittests_doc.yml)
 
 # Demo for web service and GUI for the Energy Asset Optimization (EAO) package
 

@@ -1,2 +1,10 @@
 
 eao.log
+__pycache__/eao_server.cpython-311.pyc
+.hypothesis/unicode_data/13.0.0/charmap.json.gz
+.hypothesis/tmp/tmpogvzxa_s
+.hypothesis/tmp/tmpgo_7sxd7
+.hypothesis/tmp/tmpi10hh08r
+tests/__pycache__/test_eao_online.cpython-311-pytest-7.4.1.pyc
+tests/__pycache__/test_eao_online.cpython-39-pytest-6.2.2.pyc
+tests/__pycache__/test_eao_online.cpython-311-pytest-7.4.1.pyc
