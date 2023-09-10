@@ -1,0 +1,46 @@
+[
+    {
+        "__class__": "Node",
+        "commodity": "power",
+        "name": "node_power",
+        "unit": {
+            "__class__": "Unit",
+            "factor": 1,
+            "flow": "MW",
+            "volume": "MWh"
+        }
+    },
+    {
+        "__class__": "Node",
+        "commodity": "heat",
+        "name": "node_heat",
+        "unit": {
+            "__class__": "Unit",
+            "factor": 1,
+            "flow": "MW",
+            "volume": "MWh"
+        }
+    },
+    {
+        "__class__": "Node",
+        "commodity": "gas",
+        "name": "gas",
+        "unit": {
+            "__class__": "Unit",
+            "factor": 1,
+            "flow": "MW",
+            "volume": "MWh"
+        }
+    },
+    {
+        "__class__": "Node",
+        "commodity": "power",
+        "name": "node_power_2",
+        "unit": {
+            "__class__": "Unit",
+            "factor": 1,
+            "flow": "MW",
+            "volume": "MWh"
+        }
+    }
+]

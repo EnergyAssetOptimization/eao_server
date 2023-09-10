@@ -1,0 +1,278 @@
+[
+    {
+        "__class__": "Asset",
+        "asset_type": "SimpleContract",
+        "end": null,
+        "extra_costs": 0.0,
+        "freq": null,
+        "max_cap": 10,
+        "min_cap": -10,
+        "name": "std_contract",
+        "nodes": [
+            {
+                "__class__": "Node",
+                "commodity": "power",
+                "name": "node_power",
+                "unit": {
+                    "__class__": "Unit",
+                    "factor": 1,
+                    "flow": "MW",
+                    "volume": "MWh"
+                }
+            }
+        ],
+        "periodicity": null,
+        "periodicity_duration": null,
+        "price": "price_tag",
+        "profile": null,
+        "start": null,
+        "wacc": 0
+    },
+    {
+        "__class__": "Asset",
+        "asset_type": "Storage",
+        "block_size": "d",
+        "cap_in": 1,
+        "cap_out": 1,
+        "cost_in": 0.0,
+        "cost_out": 0.0,
+        "cost_store": 0.0,
+        "eff_in": 0.9,
+        "end": null,
+        "end_level": 0,
+        "freq": null,
+        "inflow": 0.0,
+        "max_store_duration": null,
+        "name": "battery",
+        "no_simult_in_out": false,
+        "nodes": [
+            {
+                "__class__": "Node",
+                "commodity": "power",
+                "name": "node_power",
+                "unit": {
+                    "__class__": "Unit",
+                    "factor": 1,
+                    "flow": "MW",
+                    "volume": "MWh"
+                }
+            }
+        ],
+        "periodicity": null,
+        "periodicity_duration": null,
+        "price": null,
+        "profile": null,
+        "size": 4,
+        "start": null,
+        "start_level": 0,
+        "wacc": 0.0
+    },
+    {
+        "__class__": "Asset",
+        "asset_type": "MultiCommodityContract",
+        "end": null,
+        "extra_costs": 0,
+        "factors_commodities": [
+            -1,
+            4
+        ],
+        "freq": null,
+        "max_cap": 10,
+        "max_take": null,
+        "min_cap": 0,
+        "min_take": null,
+        "name": "power_to_heat",
+        "nodes": [
+            {
+                "__class__": "Node",
+                "commodity": "power",
+                "name": "node_power",
+                "unit": {
+                    "__class__": "Unit",
+                    "factor": 1,
+                    "flow": "MW",
+                    "volume": "MWh"
+                }
+            },
+            {
+                "__class__": "Node",
+                "commodity": "heat",
+                "name": "node_heat",
+                "unit": {
+                    "__class__": "Unit",
+                    "factor": 1,
+                    "flow": "MW",
+                    "volume": "MWh"
+                }
+            }
+        ],
+        "periodicity": null,
+        "periodicity_duration": null,
+        "price": null,
+        "profile": null,
+        "start": null,
+        "wacc": 0
+    },
+    {
+        "__class__": "Asset",
+        "asset_type": "Transport",
+        "costs_const": 0.0,
+        "costs_time_series": null,
+        "efficiency": 0.95,
+        "end": null,
+        "freq": null,
+        "max_cap": 0.0,
+        "min_cap": 0.0,
+        "name": "transport",
+        "nodes": [
+            {
+                "__class__": "Node",
+                "commodity": "power",
+                "name": "node_power",
+                "unit": {
+                    "__class__": "Unit",
+                    "factor": 1,
+                    "flow": "MW",
+                    "volume": "MWh"
+                }
+            },
+            {
+                "__class__": "Node",
+                "commodity": "power",
+                "name": "node_power_2",
+                "unit": {
+                    "__class__": "Unit",
+                    "factor": 1,
+                    "flow": "MW",
+                    "volume": "MWh"
+                }
+            }
+        ],
+        "periodicity": null,
+        "periodicity_duration": null,
+        "profile": null,
+        "start": null,
+        "wacc": 0
+    },
+    {
+        "__class__": "Asset",
+        "asset_type": "MultiCommodityContract",
+        "end": null,
+        "extra_costs": "CHP_costs_tag",
+        "factors_commodities": [
+            0.8,
+            2.2
+        ],
+        "freq": null,
+        "max_cap": 1,
+        "max_take": null,
+        "min_cap": 0,
+        "min_take": null,
+        "name": "simple CHP",
+        "nodes": [
+            {
+                "__class__": "Node",
+                "commodity": "power",
+                "name": "node_power",
+                "unit": {
+                    "__class__": "Unit",
+                    "factor": 1,
+                    "flow": "MW",
+                    "volume": "MWh"
+                }
+            },
+            {
+                "__class__": "Node",
+                "commodity": "heat",
+                "name": "node_heat",
+                "unit": {
+                    "__class__": "Unit",
+                    "factor": 1,
+                    "flow": "MW",
+                    "volume": "MWh"
+                }
+            }
+        ],
+        "periodicity": null,
+        "periodicity_duration": null,
+        "price": null,
+        "profile": null,
+        "start": null,
+        "wacc": 0
+    },
+    {
+        "__class__": "Asset",
+        "asset_type": "CHPAsset",
+        "consumption_if_on": 0.1,
+        "conversion_factor_power_heat": 0.2,
+        "end": null,
+        "extra_costs": 0.0,
+        "freq": null,
+        "fuel_efficiency": 0.5,
+        "last_dispatch": 0,
+        "max_cap": 10.0,
+        "max_share_heat": 1,
+        "max_take": null,
+        "min_cap": 1.0,
+        "min_downtime": 0,
+        "min_runtime": 0,
+        "min_take": null,
+        "name": "CHP with gas",
+        "nodes": [
+            {
+                "__class__": "Node",
+                "commodity": "power",
+                "name": "node_power",
+                "unit": {
+                    "__class__": "Unit",
+                    "factor": 1,
+                    "flow": "MW",
+                    "volume": "MWh"
+                }
+            },
+            {
+                "__class__": "Node",
+                "commodity": "heat",
+                "name": "node_heat",
+                "unit": {
+                    "__class__": "Unit",
+                    "factor": 1,
+                    "flow": "MW",
+                    "volume": "MWh"
+                }
+            },
+            {
+                "__class__": "Node",
+                "commodity": "gas",
+                "name": "gas",
+                "unit": {
+                    "__class__": "Unit",
+                    "factor": 1,
+                    "flow": "MW",
+                    "volume": "MWh"
+                }
+            }
+        ],
+        "periodicity": null,
+        "periodicity_duration": null,
+        "price": null,
+        "profile": null,
+        "ramp": null,
+        "ramp_freq": null,
+        "running_costs": 5.0,
+        "shutdown_ramp_lower_bounds": null,
+        "shutdown_ramp_lower_bounds_heat": null,
+        "shutdown_ramp_upper_bounds": null,
+        "shutdown_ramp_upper_bounds_heat": null,
+        "start": null,
+        "start_costs": 1.0,
+        "start_fuel": 10,
+        "start_ramp_lower_bounds": null,
+        "start_ramp_lower_bounds_heat": null,
+        "start_ramp_upper_bounds": null,
+        "start_ramp_upper_bounds_heat": null,
+        "time_already_off": 0,
+        "time_already_running": 0,
+        "wacc": 0
+    }
+]

@@ -1,0 +1,27 @@
+# generate from notebook: !conda env export > environment.yml
+name: python_3.8
+
+channel:
+    - conda-forge
+    - defaults
+
+dependencies:
+  - python=3.11
+  - pip
+  - ipywidgets
+  - matplotlib
+  - numpy
+  - pandas
+  - scipy
+  - networkx
+  - sphinx
+  - flask
+  - pip:
+    - python-dateutil
+    - cvxpy
+    - cvxopt
+    - openpyxl
+    - nbsphinx
+    - flask_unittest
+    - eaopack
+    #- jupyter-contrib-nbextensions==0.5.1
