@@ -35,7 +35,7 @@ prices ={'rand_price_1': (np.random.rand(timegrid.T)-0.5),
 
 portf = eao.portfolio.Portfolio([a1, a2, a3, a5])
 op = portf.setup_optim_problem(prices = prices, timegrid = timegrid)
-res = op.optimize(solver = 'SCIP')
+res = op.optimize()
 out = eao.io.extract_output(portf, op, res)
 pass
 ###################################################################### end dummy data
