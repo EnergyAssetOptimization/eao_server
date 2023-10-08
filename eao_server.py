@@ -7,9 +7,21 @@ import typing
 import copy
 
 ## standard info
-file_nodes  = 'std_nodes.json'
-file_assets = 'std_assets.json'
-max_optim_steps = 96*5 # 5 days 15min
+# parameters to be loaded from file or else, here for convenience as dict
+parameters = {}
+parameters['file_nodes']      = 'std_nodes.json'
+parameters['file_assets']     = 'std_assets.json'
+parameters['max_optim_steps'] = 96*5 # 5 days 15min
+parameters['solver']          = 'SCIP'
+
+####
+# CVXPY (LP/ MIP optimization framework) should be installed with
+# * default solvers
+# * SCIP -- good results for MIP problems
+#   https://github.com/scipopt/PySCIPOpt#installation
+# 
+# parameters['solver']          = None or leave without this key
+
 
 logging.basicConfig(filename='eao.log', encoding='utf-8', level=logging.DEBUG)
 logging.info('**** Hi! New eao ession')
@@ -82,8 +94,8 @@ def reset():
     recorder(reset= True)
     #  load standard data ##########################################        
     logging.info('loading std data')
-    recorder(key='std_nodes', in_data= eao.serialization.to_json(eao.serialization.load_from_json(file_name=file_nodes)))
-    recorder(key='std_assets', in_data= eao.serialization.to_json(eao.serialization.load_from_json(file_name=file_assets)))
+    recorder(key='std_nodes', in_data= eao.serialization.to_json(eao.serialization.load_from_json(file_name=parameters['file_nodes'])))
+    recorder(key='std_assets', in_data= eao.serialization.to_json(eao.serialization.load_from_json(file_name=parameters['file_assets'])))
     return 'done reset', 200
 
 @app.route('/get_data_keys', methods=['GET'])
@@ -261,7 +273,7 @@ def optimize():
         logging.error(s)
         return s, 400
     # check max time
-    if tg.T > max_optim_steps:
+    if tg.T > parameters['max_optim_steps']:
         s = 'max number of time steps for optimization exceeded (computation time limit)'
         logging.error(s)
         return s,400
@@ -272,7 +284,10 @@ def optimize():
         logging.error(s)
         return s, 400
     try:
-        res = op.optimize()
+        if 'solver' in parameters:
+            res = op.optimize(solver = parameters['solver'] )
+        else:
+            res = op.optimize()
     except:
         s = 'error - could not set up problem'
         logging.error(s)

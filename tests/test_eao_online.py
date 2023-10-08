@@ -25,14 +25,19 @@ a2 = eao.assets.SimpleContract(name = 'SC_2', price = 'rand_price_2', nodes = no
 a3 = eao.assets.SimpleContract(name = 'SC_3', price = 'rand_price_2', nodes = node2 ,
                 min_cap= -1., max_cap=10., extra_costs= 1.)
 a5 = eao.assets.Storage('storage', nodes = node1, \
-start=dt.date(2021,1,1), end=dt.date(2021,2,1),size=10, \
-cap_in=1.0/24.0, cap_out=1.0/24.0, start_level=5, end_level=5)
+                        start=dt.date(2021,1,1), end=dt.date(2021,2,1),size=10, \
+                        cap_in=1.0/24.0, cap_out=1.0/24.0, start_level=5, end_level=5,
+                        no_simult_in_out=True)
 #a3.set_timegrid(timegrid)
 prices ={'rand_price_1': (np.random.rand(timegrid.T)-0.5),
         'rand_price_2': (5.*np.random.rand(timegrid.T)-0.5),
         }
 
 portf = eao.portfolio.Portfolio([a1, a2, a3, a5])
+op = portf.setup_optim_problem(prices = prices, timegrid = timegrid)
+res = op.optimize(solver = 'SCIP')
+out = eao.io.extract_output(portf, op, res)
+pass
 ###################################################################### end dummy data
 
 class TestBasic(flask_unittest.ClientTestCase):
