@@ -12,15 +12,15 @@ parameters = {}
 parameters['file_nodes']      = 'std_nodes.json'
 parameters['file_assets']     = 'std_assets.json'
 parameters['max_optim_steps'] = 96*5 # 5 days 15min
-parameters['solver']          = 'SCIP'
+parameters['solver']          = 'standard'
 
 ####
 # CVXPY (LP/ MIP optimization framework) should be installed with
 # * default solvers
-# * SCIP -- good results for MIP problems
+# * SCIP -- particularly for MIP problems
 #   https://github.com/scipopt/PySCIPOpt#installation
 # 
-# parameters['solver']          = None or leave without this key
+# parameters['solver']          = None or leave without this key for default
 
 
 logging.basicConfig(filename='eao.log', encoding='utf-8', level=logging.DEBUG)
@@ -89,6 +89,7 @@ def say_hello():
 
 @app.route('/reset')
 def reset():
+    global parameters
     """ Resetting all temporarily stored data"""
     logging.info('resetting all temp data')
     recorder(reset= True)
@@ -102,6 +103,27 @@ def reset():
 def send_data_keys():
     """ get keys of stored data """
     return json.dumps(recorder())
+
+@app.route('/set_solver', methods=['PUT'])
+def set_solver():
+    data = request.get_json()
+    if not isinstance(data, str):
+        s = 'no valid solver. String expected'
+        logging.error(s)
+        return s, 400
+    if not data in ('standard', 'STANDARD', 'CBC', 'CLARABEL', 
+                    'GUROBI', 'CPLEX', 'ECOS', 'GLPK', 'GLPK_MI', 'SCIP', 'SCIPY', 
+                    'XPPRESS', 'SDPA', 'OSQP', 'COPT', 'MOSEK', 'NAG'):
+        s = data+' - is no valid solver'
+        logging.error(s)
+        return s, 400
+    global parameters
+    if data.lower != 'standard': 
+        parameters['solver'] = data
+    else:
+        parameters['solver'] = 'standard'
+    return 'set solver to '+str(data), 200
+
 
 @app.route('/set_portf', methods=['PUT'])
 def receive_portf():
@@ -263,6 +285,7 @@ def send_data():
     
 @app.route('/optimize', methods=['GET'])
 def optimize():
+    global parameters
     """ (3) GO! """
     try:
         tg      = eao.serialization.load_from_json(recorder('timegrid'))
@@ -284,12 +307,15 @@ def optimize():
         logging.error(s)
         return s, 400
     try:
-        if 'solver' in parameters:
-            res = op.optimize(solver = parameters['solver'] )
+        if 'solver' in parameters :
+            if parameters['solver'] !='standard':
+                res = op.optimize(solver = parameters['solver'] )
+            else:
+                res = op.optimize()
         else:
             res = op.optimize()
     except:
-        s = 'error - could not set up problem'
+        s = 'error - could not optimize'
         logging.error(s)
         return s, 400
     try:

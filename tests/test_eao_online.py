@@ -159,6 +159,18 @@ class TestBasic(flask_unittest.ClientTestCase):
         r = client.get('http://127.0.0.1:5000/optimize')
         assert r.status_code == 200
 
+        #### choose different solver & do optimization
+        r = client.put('http://127.0.0.1:5000/set_solver', json = 'standard')
+        assert r.status_code == 200        
+        r = client.get('http://127.0.0.1:5000/optimize')
+        assert r.status_code == 200
+        r = client.put('http://127.0.0.1:5000/set_solver', json = 'ECOS')
+        # r = client.put('http://127.0.0.1:5000/set_solver', json = 'SCIP') ### not installed, but likely standard choice
+
+        assert r.status_code == 200        
+        r = client.get('http://127.0.0.1:5000/optimize')
+        assert r.status_code == 200
+
         #############################################################
         ### manipulate and understand assets & portfolio   ##########
         #############################################################
